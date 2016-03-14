@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		B023BA881C6DDB6000415F04 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B023BA871C6DDB6000415F04 /* main.m */; };
+		B023BA901C6DDB7600415F04 /* JsonExtensionCreator.m in Sources */ = {isa = PBXBuildFile; fileRef = B023BA8F1C6DDB7600415F04 /* JsonExtensionCreator.m */; };
+		B023BABC1C6E17EC00415F04 /* NSMutableString+Join.m in Sources */ = {isa = PBXBuildFile; fileRef = B023BABB1C6E17EC00415F04 /* NSMutableString+Join.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +27,10 @@
 /* Begin PBXFileReference section */
 		B023BA841C6DDB6000415F04 /* JsonExtensionCreator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = JsonExtensionCreator; sourceTree = BUILT_PRODUCTS_DIR; };
 		B023BA871C6DDB6000415F04 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B023BA8E1C6DDB7600415F04 /* JsonExtensionCreator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JsonExtensionCreator.h; sourceTree = "<group>"; };
+		B023BA8F1C6DDB7600415F04 /* JsonExtensionCreator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JsonExtensionCreator.m; sourceTree = "<group>"; };
+		B023BABA1C6E17EC00415F04 /* NSMutableString+Join.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableString+Join.h"; sourceTree = "<group>"; };
+		B023BABB1C6E17EC00415F04 /* NSMutableString+Join.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableString+Join.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +64,10 @@
 			isa = PBXGroup;
 			children = (
 				B023BA871C6DDB6000415F04 /* main.m */,
+				B023BA8E1C6DDB7600415F04 /* JsonExtensionCreator.h */,
+				B023BA8F1C6DDB7600415F04 /* JsonExtensionCreator.m */,
+				B023BABA1C6E17EC00415F04 /* NSMutableString+Join.h */,
+				B023BABB1C6E17EC00415F04 /* NSMutableString+Join.m */,
 			);
 			path = JsonExtensionCreator;
 			sourceTree = "<group>";
@@ -118,6 +128,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B023BA901C6DDB7600415F04 /* JsonExtensionCreator.m in Sources */,
+				B023BABC1C6E17EC00415F04 /* NSMutableString+Join.m in Sources */,
 				B023BA881C6DDB6000415F04 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -207,13 +219,18 @@
 		B023BA8C1C6DDB6000415F04 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		B023BA8D1C6DDB6000415F04 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -237,6 +254,7 @@
 				B023BA8D1C6DDB6000415F04 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

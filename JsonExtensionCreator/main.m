@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "JsonExtensionCreator.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        // insert code here...
-        NSLog(@"Hello, World!");
+        [JsonExtensionCreator new];
+        NSLog(@"Finished");
     }
     return 0;
 }
