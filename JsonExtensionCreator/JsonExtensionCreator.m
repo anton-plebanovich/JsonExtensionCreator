@@ -9,8 +9,9 @@
 #import "JsonExtensionCreator.h"
 #import "NSMutableString+Join.h"
 
-static NSString *sourceDirectory = @"/Users/mac-246/Documents/Projects/rockspoon-pos/android-sdk/src/main/java/com/rockspoon/swift-models";
-static NSString *outputDirectory = @"/Users/mac-246/Documents/Projects/rockspoon-ios/Models/Models";
+static NSString *androidSourceDirectory = @"/Users/mac-246/Documents/Projects/rockspoon-pos/android-sdk/src/main/java/com/rockspoon/swift-models";
+static NSString *sourceDirectory = @"/Users/mac-246/Documents/Projects/rockspoon-models/swift-models";
+static NSString *outputDirectory = @"/Users/mac-246/Documents/Projects/rockspoon-ios/CustomerApp/Models";
 static const NSString *propertyTypeKey = @"propertyType";
 static const NSString *propertyNameKey = @"propertyName";
 static const NSString *propertyJsonNameKey = @"propertyJsonName";
@@ -38,8 +39,10 @@ static const NSString *propertyUnavailableKey = @"propertyUnavailable";
 - (void)getEnumsNames {
     _allIntEnumsNames = [NSMutableSet set];
     _allStringEnumsNames = [NSMutableSet set];
-    
-    NSURL *baseUrl = [NSURL URLWithString:sourceDirectory];
+  
+    [_allStringEnumsNames addObject:@"DiscountReason"];
+  
+    NSURL *baseUrl = [NSURL URLWithString:androidSourceDirectory];
     NSArray *files = [self getFilesUrls:baseUrl];
     for (NSURL *currentUrl in files) {
         NSError *error = nil;
@@ -63,7 +66,7 @@ static const NSString *propertyUnavailableKey = @"propertyUnavailable";
 - (void)getClassesNames {
     _allClassesNames = [NSMutableSet set];
     
-    NSURL *baseUrl = [NSURL URLWithString:sourceDirectory];
+    NSURL *baseUrl = [NSURL URLWithString:androidSourceDirectory];
     NSArray *files = [self getFilesUrls:baseUrl];
     for (NSURL *currentUrl in files) {
         NSError *error = nil;
@@ -124,7 +127,9 @@ static const NSString *propertyUnavailableKey = @"propertyUnavailable";
     
     [jsonFileString addNextPart:@"    return json" with:@"\n"];
     [jsonFileString addNextPart:@"  }" with:@"\n"];
-    [jsonFileString addNextPart:@"}" with:@"\n"];
+    [jsonFileString addNextPart:@"}" with:@"\n\n"];
+  
+    [jsonFileString addNextPart:[self extensionDescriptionString:className] with:@"\n"];
   
     return jsonFileString;
 }
@@ -203,6 +208,12 @@ static const NSString *propertyUnavailableKey = @"propertyUnavailable";
     }
     
     return propertySetString;
+}
+
+- (NSString *)extensionDescriptionString:(NSString *)className {
+  NSString *string = [NSString stringWithFormat:@"extension %@ {\n  override public var description: String {\n    return toJSON().description\n  }\n}", className];
+  
+  return string;
 }
 
 - (NSString *)getJsonProperty:(NSString *)propertyType {
@@ -445,11 +456,15 @@ static const NSString *propertyUnavailableKey = @"propertyUnavailable";
         propertyType = [propertyType stringByReplacingOccurrencesOfString:@" : " withString:@": "];
         [property setObject:propertyType forKey:propertyTypeKey];
         // Comment
-        if (commentComponents.count > 1 ) {
+        if (commentComponents.count > 1) {
             NSString *propertyComment = commentComponents[1];
             [property setObject:propertyComment forKey:propertyJsonNameKey];
         }
-        
+        // descriptionString
+        if ([propertyName isEqualToString:@"descriptionString"]) {
+            [property setObject:@"description" forKey:propertyJsonNameKey];
+        }
+
         [properties addObject:property];
     }
     
